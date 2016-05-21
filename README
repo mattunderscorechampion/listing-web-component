@@ -1,0 +1,4 @@
+
+A custom element that loads a resource, applies highlight.js and displays it as a code listing.
+
+Currently it is hard coded to use the 'tomorrow' highlight.js theme.
