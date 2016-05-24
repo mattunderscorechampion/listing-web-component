@@ -10,7 +10,13 @@
     if (!document.registerElement) {
         return;
     }
-    var templateDoc = document.currentScript.ownerDocument;
+
+    var templateDoc;
+    if (document._currentScript) {
+        templateDoc = document._currentScript.ownerDocument;
+    } else {
+        templateDoc = document.currentScript.ownerDocument;
+    }
 
     var CodeBlockProto = Object.create(HTMLElement.prototype);
 
