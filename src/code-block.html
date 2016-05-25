@@ -3,14 +3,10 @@
     <style>
         @import "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css"
     </style>
-    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code></code></pre>
+    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code>Loading</code></pre>
 </template>
 <script>
 (function() {
-    if (!document.registerElement) {
-        return;
-    }
-
     var templateDoc;
     if (document._currentScript) {
         templateDoc = document._currentScript.ownerDocument;
@@ -24,22 +20,28 @@
         var dataSrc = this.getAttribute('data-src');
         var gistElement = this;
 
+        var shadow = gistElement.createShadowRoot();
+
+        var template = templateDoc.querySelector('#x-code-block-template');
+        var clone = template.content.cloneNode(true);
+        shadow.appendChild(document.importNode(clone, true));
+
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             var httpResponse = this;
             var DONE = httpResponse.DONE || 4;
             if (httpResponse.readyState === DONE) {
-                var shadow = gistElement.createShadowRoot();
+                var loadedClone = template.content.cloneNode(true);
 
-                var template = templateDoc.querySelector('#x-code-block-template');
-                var clone = template.content.cloneNode(true);
-
-                var pre = clone.childNodes[3];
-                var code = pre.childNodes[0];
-                code.innerHTML = httpResponse.responseText;
+                var code = loadedClone.childNodes[3].childNodes[0];
+                code.textContent = httpResponse.responseText;
                 hljs.highlightBlock(code);
 
-                shadow.appendChild(document.importNode(clone, true));
+                while (shadow.firstChild) {
+                    shadow.removeChild(shadow.firstChild);
+                }
+
+                shadow.appendChild(document.importNode(loadedClone, true));
             }
         };
         request.open('GET', dataSrc, true);
