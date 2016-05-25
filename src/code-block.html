@@ -21,7 +21,6 @@
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
-
         var template = templateDoc.querySelector('#x-code-block-template');
         var clone = template.content.cloneNode(true);
         shadow.appendChild(document.importNode(clone, true));
