@@ -5,7 +5,6 @@
     }
 
     var CodeBlockProto = Object.create(HTMLElement.prototype);
-
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
         var gistElement = this;
@@ -34,10 +33,10 @@
                 while (shadow.firstChild) {
                     shadow.removeChild(shadow.firstChild);
                 }
-
                 shadow.appendChild(pre);
             }
         };
+
         request.open('GET', dataSrc, true);
         request.send(null);
     };

@@ -7,21 +7,20 @@
 </template>
 <script>
 (function() {
-    var templateDoc;
+    var importDoc;
     if (document._currentScript) {
-        templateDoc = document._currentScript.ownerDocument;
+        importDoc = document._currentScript.ownerDocument;
     } else {
-        templateDoc = document.currentScript.ownerDocument;
+        importDoc = document.currentScript.ownerDocument;
     }
+    var template = importDoc.querySelector('#x-code-block-template');
 
     var CodeBlockProto = Object.create(HTMLElement.prototype);
-
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
-        var template = templateDoc.querySelector('#x-code-block-template');
         var clone = template.content.cloneNode(true);
         shadow.appendChild(document.importNode(clone, true));
 
@@ -39,10 +38,10 @@
                 while (shadow.firstChild) {
                     shadow.removeChild(shadow.firstChild);
                 }
-
                 shadow.appendChild(document.importNode(loadedClone, true));
             }
         };
+
         request.open('GET', dataSrc, true);
         request.send(null);
     };
