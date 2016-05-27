@@ -7,12 +7,19 @@
     var CodeBlockProto = Object.create(HTMLElement.prototype);
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
+        var dataCaption = this.getAttribute('data-caption');
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
         var loading = document.createElement('pre');
         loading.style = 'text-align: left; font-size: 10pt; border: 1px solid grey';
         loading.textContent = 'Loading';
+        if (dataCaption) {
+            var loadingCaption = document.createElement('div');
+            loadingCaption.style = 'border-top: 1px solid grey; text-align: center;';
+            loadingCaption.textContent = dataCaption;
+            loading.appendChild(loadingCaption);
+        }
         shadow.appendChild(loading);
 
         var request = new XMLHttpRequest();
@@ -29,6 +36,12 @@
                 code.textContent = httpResponse.responseText;
                 hljs.highlightBlock(code);
                 pre.appendChild(code);
+                if (dataCaption) {
+                    var caption = document.createElement('div');
+                    caption.style = 'border-top: 1px solid grey; text-align: center;';
+                    caption.textContent = dataCaption;
+                    pre.appendChild(caption);
+                }
 
                 while (shadow.firstChild) {
                     shadow.removeChild(shadow.firstChild);
