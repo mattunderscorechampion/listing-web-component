@@ -3,7 +3,7 @@
     <style>
         @import "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css"
     </style>
-    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code>Loading</code></pre>
+    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code>Loading</code><div name="caption" style="display: none; border-top: 1px solid grey; text-align: center;" /></pre>
 </template>
 <script>
 (function() {
@@ -18,11 +18,17 @@
     var CodeBlockProto = Object.create(HTMLElement.prototype);
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
+        var dataCaption = this.getAttribute('data-caption');
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
         var clone = template.content.cloneNode(true);
         shadow.appendChild(document.importNode(clone, true));
+        if (dataCaption) {
+            var caption = shadow.querySelector('[name=caption]');
+            caption.textContent = dataCaption;
+            caption.style.display = 'block';
+        }
 
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () {
@@ -39,6 +45,11 @@
                     shadow.removeChild(shadow.firstChild);
                 }
                 shadow.appendChild(document.importNode(loadedClone, true));
+                if (dataCaption) {
+                    var caption = shadow.querySelector('[name=caption]');
+                    caption.textContent = dataCaption;
+                    caption.style.display = 'block';
+                }
             }
         };
 
