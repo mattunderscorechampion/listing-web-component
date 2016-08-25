@@ -6,9 +6,8 @@ be easily embedded into your website.
 I started development on this after discovering that I was
 [unable to embed Gists in XHTML pages](https://www.mattunderscore.com/article/42).
 
-It provides a custom element that loads a resource, applies highlight.js and
-displays it as a code listing.
-
+The component provides a custom element that loads a resource, applies
+[highlight.js](https://highlightjs.org/) and displays it as a code listing.
 Currently it is hard coded to use the 'tomorrow' highlight.js theme.
 
 The `src/code-block.js` contains a script that uses
@@ -22,3 +21,9 @@ The `src/code-block.html` contains an
 [custom elements](http://w3c.github.io/webcomponents/spec/custom/), the
 [shadow DOM](http://w3c.github.io/webcomponents/spec/shadow/) and
 [HTML templates](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element).
+
+The `test` directory provides two usage examples.
+One example demonstrates `src/code-block.js` and the other `src/code-block.html`.
+Otherwise their content is the same.
+Two code listings one hosted on GistHub and the other with code inlined into the
+custom element.
