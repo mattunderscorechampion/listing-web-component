@@ -8,6 +8,7 @@
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
         var dataCaption = this.getAttribute('data-caption');
+        var hostedByGithub = dataSrc && dataSrc.startsWith('https://gist.githubusercontent.com/');
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
@@ -49,6 +50,12 @@
                         caption.style = 'border-top: 1px solid grey; text-align: center;';
                         caption.textContent = dataCaption;
                         pre.appendChild(caption);
+                    }
+                    if (hostedByGithub) {
+                        var githubShout = document.createElement('div');
+                        githubShout.style = 'border-top: 1px solid grey; text-align: center;';
+                        githubShout.textContent = 'Hosted by GitHub';
+                        pre.appendChild(githubShout);
                     }
 
                     while (shadow.firstChild) {

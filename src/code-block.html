@@ -3,7 +3,7 @@
     <style>
         @import "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css"
     </style>
-    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code>Loading</code><div name="caption" style="display: none; border-top: 1px solid grey; text-align: center;" /></pre>
+    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code data-name="code">Loading</code><div data-name="caption" style="display: none; border-top: 1px solid grey; text-align: center;"></div><div data-name="githubShout" style="display: none; border-top: 1px solid grey; text-align: center;">Hosted by GitHub</div></pre>
 </template>
 <script>
 (function() {
@@ -19,6 +19,7 @@
     CodeBlockProto.createdCallback = function() {
         var dataSrc = this.getAttribute('data-src');
         var dataCaption = this.getAttribute('data-caption');
+        var hostedByGithub = dataSrc && dataSrc.startsWith('https://gist.githubusercontent.com/');
         var gistElement = this;
 
         var shadow = gistElement.createShadowRoot();
@@ -28,12 +29,12 @@
             initialCode.textContent = gistElement.textContent.trim();
             hljs.highlightBlock(initialCode);
         }
-        shadow.appendChild(document.importNode(clone, true));
         if (dataCaption) {
-            var caption = shadow.querySelector('[name=caption]');
+            var caption = clone.querySelector('[data-name=caption]');
             caption.textContent = dataCaption;
             caption.style.display = 'block';
         }
+        shadow.appendChild(document.importNode(clone, true));
 
         if (dataSrc) {
             var request = new XMLHttpRequest();
@@ -46,16 +47,20 @@
                     var code = loadedClone.childNodes[3].childNodes[0];
                     code.textContent = httpResponse.responseText;
                     hljs.highlightBlock(code);
+                    if (dataCaption) {
+                        var caption = loadedClone.querySelector('[data-name=caption]');
+                        caption.textContent = dataCaption;
+                        caption.style.display = 'block';
+                    }
+                    if (hostedByGithub) {
+                        var githubShout = loadedClone.querySelector('[data-name=githubShout]');
+                        githubShout.style.display = 'block';
+                    }
 
                     while (shadow.firstChild) {
                         shadow.removeChild(shadow.firstChild);
                     }
                     shadow.appendChild(document.importNode(loadedClone, true));
-                    if (dataCaption) {
-                        var caption = shadow.querySelector('[name=caption]');
-                        caption.textContent = dataCaption;
-                        caption.style.display = 'block';
-                    }
                 }
             };
 
