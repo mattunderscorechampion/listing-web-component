@@ -7,6 +7,21 @@
 </template>
 <script>
 (function() {
+    function normaliseDataSrc(dataSrc) {
+        if (dataSrc) {
+            var match = dataSrc.match(/https:\/\/gist.github.com(.+)/);
+            if (match) {
+                if (match[1].endsWith('/')) {
+                    return 'https://gist.githubusercontent.com' + match[1] + 'raw/';
+                }
+                else {
+                    return 'https://gist.githubusercontent.com' + match[1] + '/raw/';
+                }
+            }
+        }
+        return dataSrc;
+    }
+
     var importDoc;
     if (document._currentScript) {
         importDoc = document._currentScript.ownerDocument;
@@ -17,7 +32,7 @@
 
     var CodeBlockProto = Object.create(HTMLElement.prototype);
     CodeBlockProto.createdCallback = function() {
-        var dataSrc = this.getAttribute('data-src');
+        var dataSrc = normaliseDataSrc(this.getAttribute('data-src'));
         var dataCaption = this.getAttribute('data-caption');
         var hostedByGithub = dataSrc && dataSrc.startsWith('https://gist.githubusercontent.com/');
         var gistElement = this;
