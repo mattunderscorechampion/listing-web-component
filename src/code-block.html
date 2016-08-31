@@ -1,5 +1,5 @@
 <script src="//cdn.jsdelivr.net/highlight.js/9.4.0/highlight.min.js"></script>
-<template id="x-code-block-template">
+<template id="x-listing-template">
     <style>
         @import "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css"
     </style>
@@ -28,7 +28,7 @@
     } else {
         importDoc = document.currentScript.ownerDocument;
     }
-    var template = importDoc.querySelector('#x-code-block-template');
+    var template = importDoc.querySelector('#x-listing-template');
 
     var CodeBlockProto = Object.create(HTMLElement.prototype);
     CodeBlockProto.createdCallback = function() {
@@ -84,7 +84,7 @@
         }
     };
 
-    document.registerElement('x-code-block', {
+    document.registerElement('x-listing', {
         prototype: CodeBlockProto
     });
 })();

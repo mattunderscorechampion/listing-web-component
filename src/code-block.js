@@ -85,7 +85,7 @@
         }
     };
 
-    document.registerElement('x-code-block', {
+    document.registerElement('x-listing', {
         prototype: CodeBlockProto
     });
 })();
