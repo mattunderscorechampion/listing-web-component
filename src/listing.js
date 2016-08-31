@@ -79,6 +79,30 @@
                     shadow.appendChild(pre);
                 }
             };
+            request.onerror = function () {
+                var pre = document.createElement('pre');
+                pre.style = 'text-align: left; font-size: 10pt; border: 1px solid grey';
+                var code = document.createElement('code');
+                code.textContent = 'There was an error loading the page';
+                pre.appendChild(code);
+                if (dataCaption) {
+                    var caption = document.createElement('div');
+                    caption.style = 'border-top: 1px solid grey; text-align: center;';
+                    caption.textContent = dataCaption;
+                    pre.appendChild(caption);
+                }
+                if (hostedByGithub) {
+                    var githubShout = document.createElement('div');
+                    githubShout.style = 'border-top: 1px solid grey; text-align: center;';
+                    githubShout.textContent = 'Hosted by GitHub';
+                    pre.appendChild(githubShout);
+                }
+
+                while (shadow.firstChild) {
+                    shadow.removeChild(shadow.firstChild);
+                }
+                shadow.appendChild(pre);
+            };
 
             request.open('GET', dataSrc, true);
             request.send(null);
