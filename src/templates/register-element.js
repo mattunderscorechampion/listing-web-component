@@ -1,26 +1,5 @@
-<script src="//cdn.jsdelivr.net/highlight.js/9.4.0/highlight.min.js"></script>
-<template id="x-listing-template">
-    <style>
-        @import "//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/tomorrow.min.css"
-    </style>
-    <pre style="text-align: left; font-size: 10pt; border: 1px solid grey;"><code data-name="code">Loading</code><div data-name="caption" style="display: none; border-top: 1px solid grey; text-align: center;"></div><div data-name="githubShout" style="display: none; border-top: 1px solid grey; text-align: center;">Hosted by GitHub</div></pre>
-</template>
-<script>
 (function() {
-    function normaliseDataSrc(dataSrc) {
-        if (dataSrc) {
-            var match = dataSrc.match(/https:\/\/gist.github.com(.+)/);
-            if (match) {
-                if (match[1].endsWith('/')) {
-                    return 'https://gist.githubusercontent.com' + match[1] + 'raw/';
-                }
-                else {
-                    return 'https://gist.githubusercontent.com' + match[1] + '/raw/';
-                }
-            }
-        }
-        return dataSrc;
-    }
+    {% include "normalise-data-src.js" %}
 
     var importDoc;
     if (document._currentScript) {
@@ -109,4 +88,3 @@
         prototype: CodeBlockProto
     });
 })();
-</script>

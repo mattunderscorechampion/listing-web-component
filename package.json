@@ -16,7 +16,9 @@
         "url": "https://github.com/mattunderscorechampion/listing-web-component/issues"
     },
     "devDependencies": {
-        "gulp": "3.9.1"
+        "gulp": "3.9.1",
+        "gulp-nunjucks": "2.2.0",
+        "gulp-filter": "4.0.0"
     },
     "scripts" : {
         "build" : "npm run localclean && npm install && gulp",
