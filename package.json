@@ -1,0 +1,26 @@
+{
+    "name": "listing-web-component",
+    "version": "0.1.0",
+    "description": "Web component for code listings.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mattunderscorechampion/listing-web-component.git"
+    },
+    "keywords": [
+        "web-components",
+        "code listing"
+    ],
+    "author": "Matt Champion",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mattunderscorechampion/listing-web-component/issues"
+    },
+    "devDependencies": {
+        "gulp": "3.9.1"
+    },
+    "scripts" : {
+        "build" : "npm run localclean && npm install && gulp",
+        "localclean" : "rm -rf target",
+        "clean" : "npm run localclean && rm -rf node_modules"
+    }
+}
