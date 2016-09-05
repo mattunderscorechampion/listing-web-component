@@ -18,10 +18,12 @@
     "devDependencies": {
         "gulp": "3.9.1",
         "gulp-nunjucks": "2.2.0",
-        "gulp-filter": "4.0.0"
+        "gulp-filter": "4.0.0",
+        "web-component-tester": "4.3.4"
     },
     "scripts" : {
         "build" : "npm run localclean && npm install && gulp",
+        "buildtest" : "npm run build && node_modules/web-component-tester/bin/wct",
         "localclean" : "rm -rf target",
         "clean" : "npm run localclean && rm -rf node_modules"
     }

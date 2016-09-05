@@ -24,8 +24,11 @@ The `target/dist/listing-import.html` contains an
 [shadow DOM](http://w3c.github.io/webcomponents/spec/shadow/) and
 [HTML templates](https://html.spec.whatwg.org/multipage/scripting.html#the-template-element).
 
-The `test` directory provides two usage examples.
+The `examples` directory provides two usage examples.
 One example demonstrates `listing-script.js` and the other `listing-import.html`.
 Otherwise their content is the same.
 Two code listings one hosted on GistHub and the other with code inlined into the
 custom element.
+
+Automated tests are run using `web-component-tester` with the command
+`npm run build`.
