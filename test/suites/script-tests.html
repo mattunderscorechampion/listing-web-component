@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="../node_modules/web-component-tester/browser.js"></script>
-        <link rel="import" href="../target/dist/listing-import.html">
+        <script src="../../node_modules/web-component-tester/browser.js"></script>
+        <script src="../../target/dist/listing-script.js">
     </head>
     <body>
         <x-listing id="fixture" data-caption="Inlined text">function a(b) {
 }</x-listing>
         <script>
-            suite('<x-listing>', function() {
+            suite('<x-listing> script', function() {
                 var element;
 
                 setup(function() {
