@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     filter = require('gulp-filter');
 
 gulp.task('generate', function() {
-    var highlightVersion = '9.4.0';
+    var highlightVersion = '9.9.0';
     var hightlightStyle = 'tomorrow';
     var hightlightJsUrl = '//cdn.jsdelivr.net/highlight.js/' + highlightVersion + '/highlight.min.js';
     var hightlightStyleUrl = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/' + highlightVersion + '/styles/' + hightlightStyle + '.min.css';
