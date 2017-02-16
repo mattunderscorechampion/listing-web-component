@@ -6,7 +6,7 @@ var gulp = require('gulp'),
 
 gulp.task('generate', function() {
     return gulp.src('src/templates/*')
-        .pipe(nunjucks.compile())
+        .pipe(nunjucks.compile({style : '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/zenburn.min.css'}))
         .pipe(filter(['**/listing-import.html', '**/listing-script.js']))
         .pipe(gulp.dest('target/dist'))
 });
